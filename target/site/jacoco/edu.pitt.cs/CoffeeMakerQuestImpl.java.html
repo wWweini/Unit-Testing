@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CoffeeMakerQuestImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">coffeemaker</a> &gt; <a href="index.source.html" class="el_package">edu.pitt.cs</a> &gt; <span class="el_source">CoffeeMakerQuestImpl.java</span></div><h1>CoffeeMakerQuestImpl.java</h1><pre class="source lang-java linenums">package edu.pitt.cs;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class CoffeeMakerQuestImpl implements CoffeeMakerQuest {
+
+<span class="fc" id="L8">	static final String newline = System.lineSeparator(); // Platform independent newline (&quot;\n&quot; or &quot;\r\n&quot;)</span>
+
+	// TODO: Add more member variables and methods as needed.
+	private Player player;
+	private ArrayList&lt;Room&gt; rooms;
+	private int currentRoomIndex;
+
+
+	/**
+	 * Constructor. Rooms are laid out from south to north, such that the
+	 * first room in rooms becomes the southernmost room and the last room becomes
+	 * the northernmost room. Initially, the player is at the southernmost room.
+	 * 
+	 * @param player Player for this game
+	 * @param rooms  List of rooms in this game
+	 */
+<span class="fc" id="L24">	CoffeeMakerQuestImpl(Player player, ArrayList&lt;Room&gt; rooms) {</span>
+		// TODO: Fill in
+<span class="fc" id="L26">		this.player = player;</span>
+<span class="fc" id="L27">		this.rooms = rooms;</span>
+<span class="fc" id="L28">		this.currentRoomIndex = 0;</span>
+<span class="fc" id="L29">	}</span>
+
+	/**
+	 * Whether the game is over. The game ends when the player drinks the coffee.
+	 * 
+	 * @return true if the game is over, false otherwise
+	 */
+	public boolean isGameOver() {
+		// TODO: Fill in
+		//player have all the items
+<span class="pc bpc" id="L39" title="2 of 6 branches missed.">		if(player.hasItem(Item.COFFEE)&amp;&amp;player.hasItem(Item.CREAM)&amp;&amp;player.hasItem(Item.SUGAR)){</span>
+<span class="fc" id="L40">			return true;</span>
+		}
+<span class="fc" id="L42">		return false;</span>
+	}
+
+	/**
+	 * The method returns success if and only if: 1) Th southernmost room has a
+	 * north door only, 2) The northernmost room has a south door only, and 3) The
+	 * rooms in the middle have both north and south doors. If there is only one
+	 * room, there should be no doors.
+	 * 
+	 * @return true if check successful, false otherwise
+	 */
+	public boolean areDoorsPlacedCorrectly() {
+		// TODO: Fill in
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">		if (rooms.isEmpty()) return false;</span>
+
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        for (int i = 0; i &lt; rooms.size(); i++) {</span>
+<span class="fc" id="L58">            Room room = rooms.get(i);</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            if (i == 0) {</span>
+                //southernmost room should only have a north door
+<span class="pc bpc" id="L61" title="2 of 4 branches missed.">                if (room.getSouthDoor() != null || room.getNorthDoor() == null) return false;</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            } else if (i == rooms.size() - 1) {</span>
+                //northernmost room should only have a south door
+<span class="pc bpc" id="L64" title="2 of 4 branches missed.">                if (room.getNorthDoor() != null || room.getSouthDoor() == null) return false;</span>
+            } else {
+                //middle room should have both doors
+<span class="pc bpc" id="L67" title="1 of 4 branches missed.">                if (room.getNorthDoor() == null || room.getSouthDoor() == null) return false;</span>
+            }
+        }
+<span class="fc" id="L70">        return true;</span>
+	}
+
+	/**
+	 * Checks whether each room has a unique adjective and furnishing.
+	 * 
+	 * @return true if check successful, false otherwise
+	 */
+
+	public boolean areRoomsUnique() {
+		// TODO: Fill in
+		//HashSet for no duplicate
+<span class="fc" id="L82">		HashSet&lt;String&gt; adjectives = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L83">        HashSet&lt;String&gt; furnishings = new HashSet&lt;&gt;();</span>
+
+		//check for duplicate
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        for (Room room : rooms) {</span>
+<span class="pc bpc" id="L87" title="1 of 4 branches missed.">            if (!adjectives.add(room.getAdjective()) || !furnishings.add(room.getFurnishing())) {</span>
+<span class="fc" id="L88">                return false; </span>
+            }
+        }
+<span class="nc" id="L91">        return true;</span>
+	}
+
+	/**
+	 * Returns the room the player is currently in. If location of player has not
+	 * yet been initialized with setCurrentRoom, returns null.
+	 * 
+	 * @return room player is in, or null if not yet initialized
+	 */
+	public Room getCurrentRoom() {
+		// TODO: Fill in
+		//not initialized
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">		if(rooms.isEmpty()){</span>
+<span class="nc" id="L104">			return null;</span>
+		}
+<span class="fc" id="L106">		return rooms.get(currentRoomIndex);</span>
+	}
+
+	/**
+	 * Set the current location of the player. If room does not exist in the game,
+	 * then the location of the player does not change and false is returned.
+	 * 
+	 * @param room the room to set as the player location
+	 * @return true if successful, false otherwise
+	 */
+	public boolean setCurrentRoom(Room room) {
+		// TODO: Fill in
+<span class="fc" id="L118">		int index = rooms.indexOf(room);</span>
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">		if(index != -1){</span>
+<span class="fc" id="L120">			currentRoomIndex = index;</span>
+<span class="fc" id="L121">			return true;</span>
+		}
+<span class="nc" id="L123">		return false;</span>
+	}
+
+	/**
+	 * Get the instructions string command prompt. It returns the following prompt:
+	 * &quot; INSTRUCTIONS (N,S,L,I,D,H) &gt; &quot;.
+	 * 
+	 * @return comamnd prompt string
+	 */
+	public String getInstructionsString() {
+		// TODO: Fill in
+<span class="nc" id="L134">		return &quot; INSTRUCTIONS (N,S,L,I,D,H) &gt; &quot; + newline;</span>
+	}
+
+	/**
+	 * A helper method for the &quot;H&quot; command. It returns the following help string:
+	 * &quot;N - Go north&quot; + newline + &quot;S - Go south&quot; + newline + &quot;L - Look and collect
+	 * any items in the room&quot; + newline +
+	 * &quot;I - Show inventory of items collected&quot; + newline + &quot;D - Drink coffee made
+	 * from items in inventory&quot; + newline.
+	 * 
+	 * @return help string
+	 */
+	private String getHelpString() {
+		// TODO: Fill in
+<span class="fc" id="L148">		return &quot;N - Go north&quot; + newline + </span>
+<span class="fc" id="L149">			   &quot;S - Go south&quot; + newline + </span>
+<span class="fc" id="L150">			   &quot;L - Look and collect any items in the room&quot; + newline +</span>
+<span class="fc" id="L151">			   &quot;I - Show inventory of items collected&quot; + newline + </span>
+<span class="fc" id="L152">			   &quot;D - Drink coffee made from items in inventory&quot; + newline;</span>
+	}
+
+	/**
+	 * Processes the user command given in String cmd and returns the response
+	 * string. For the list of commands, please try giving the &quot;H&quot; command in the
+	 * solution jar. Make sure you use Player.getInventoryString() whenever you need
+	 * to display the inventory.
+	 * 
+	 * @param cmd the user command
+	 * @return response string for the command
+	 */
+	public String processCommand(String cmd) {
+		// TODO: Fill in
+<span class="fc" id="L166">		cmd = cmd.toUpperCase();</span>
+
+<span class="pc bpc" id="L168" title="2 of 7 branches missed.">		switch (cmd) {</span>
+            case &quot;N&quot;:
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">                if (currentRoomIndex &lt; rooms.size() - 1) {</span>
+<span class="fc" id="L171">                    currentRoomIndex++;</span>
+<span class="fc" id="L172">					return &quot;&quot;;</span>
+                } else {
+<span class="nc" id="L174">                    return &quot;A door in that direction does not exist.&quot; + newline;</span>
+                }
+            case &quot;S&quot;:
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">                if (currentRoomIndex &gt; 0) {</span>
+<span class="nc" id="L178">                    currentRoomIndex--;</span>
+<span class="nc" id="L179">					return &quot;&quot;;</span>
+                } else {
+<span class="fc" id="L181">                    return &quot;A door in that direction does not exist.&quot; + newline;</span>
+                }
+            case &quot;L&quot;:
+<span class="fc" id="L184">                Room currentRoom = getCurrentRoom();</span>
+<span class="pc bpc" id="L185" title="2 of 4 branches missed.">                if (currentRoom != null &amp;&amp; currentRoom.getItem() != null) {</span>
+<span class="fc" id="L186">                    player.addItem(currentRoom.getItem());</span>
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">                    if(currentRoom.getItem()==Item.COFFEE){</span>
+<span class="nc" id="L188">						return &quot;There might be something here...&quot; + newline + &quot;You found some caffeinated coffee!&quot; + newline;</span>
+					}
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">					else if(currentRoom.getItem()==Item.CREAM){</span>
+<span class="fc" id="L191">						return &quot;There might be something here...&quot; + newline + &quot;You found some creamy cream!&quot; + newline;</span>
+					}
+					else{
+<span class="nc" id="L194">						return &quot;There might be something here...&quot; + newline + &quot;You found some sweet sugar!&quot; + newline;</span>
+					}
+                } else {
+<span class="nc" id="L197">                    return &quot;You don't see anything out of the ordinary.&quot;;</span>
+                }
+            case &quot;I&quot;:
+<span class="fc" id="L200">                return player.getInventoryString();</span>
+            case &quot;D&quot;:
+<span class="pc bpc" id="L202" title="2 of 6 branches missed.">                if (player.hasItem(Item.COFFEE)&amp;&amp;player.hasItem(Item.CREAM)&amp;&amp;player.hasItem(Item.SUGAR)) {</span>
+<span class="fc" id="L203">                    return player.getInventoryString() + newline +&quot;You drink the beverage and are ready to study!&quot; + newline + &quot;You win!&quot; + newline;</span>
+                } else {
+<span class="fc" id="L205">                    return player.getInventoryString() + newline + &quot;You drink thin air and can only dream of coffee. You cannot study.&quot; + newline + &quot;You lose!&quot; + newline;</span>
+                }
+            case &quot;H&quot;:
+<span class="nc" id="L208">                return getHelpString();</span>
+            default:
+<span class="nc" id="L210">                return &quot;What?&quot;;</span>
+        }
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

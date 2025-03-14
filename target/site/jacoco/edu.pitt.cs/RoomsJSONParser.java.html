@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RoomsJSONParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">coffeemaker</a> &gt; <a href="index.source.html" class="el_package">edu.pitt.cs</a> &gt; <span class="el_source">RoomsJSONParser.java</span></div><h1>RoomsJSONParser.java</h1><pre class="source lang-java linenums">package edu.pitt.cs;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+
+<span class="nc" id="L12">class RoomsJSONParser {</span>
+
+    void storeToFile(String filePath, ArrayList&lt;Room&gt; rooms) throws JsonIOException, IOException {
+<span class="nc" id="L15">        FileWriter writer = new FileWriter(filePath);</span>
+<span class="nc" id="L16">        Gson gson = new GsonBuilder().setPrettyPrinting().create();</span>
+<span class="nc" id="L17">        gson.toJson(rooms, writer);</span>
+<span class="nc" id="L18">        writer.flush();</span>
+<span class="nc" id="L19">    }</span>
+
+    ArrayList&lt;Room&gt; loadFromFile(String filePath) throws FileNotFoundException {
+<span class="nc" id="L22">        FileReader reader = new FileReader(filePath);</span>
+<span class="nc" id="L23">        Gson gson = new GsonBuilder().setPrettyPrinting().create();</span>
+<span class="nc" id="L24">        ArrayList&lt;Room&gt; rooms = gson.fromJson(reader, new TypeToken&lt;ArrayList&lt;RoomImpl&gt;&gt;(){}.getType());</span>
+<span class="nc" id="L25">        return rooms;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

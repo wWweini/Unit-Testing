@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RoomImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">coffeemaker</a> &gt; <a href="index.source.html" class="el_package">edu.pitt.cs</a> &gt; <span class="el_source">RoomImpl.java</span></div><h1>RoomImpl.java</h1><pre class="source lang-java linenums">package edu.pitt.cs;
+
+public class RoomImpl implements Room {
+
+	private String furnishing;
+	private String adjective;
+	private Item item;
+	private String northDoor;
+	private String southDoor;
+	
+<span class="fc" id="L11">	static final String newline = System.lineSeparator(); // Platform independent newline (&quot;\n&quot; or &quot;\r\n&quot;)</span>
+
+	/**
+	 * Constructor. The northDoor or the southDoor can be null if there no doors leading north or south.
+	 * 
+	 * @param furnishing Furnishing in the room
+	 * @param adjective Adjective describing the room
+	 * @param item Item present in the room
+	 * @param northDoor Description of north door (null if there is no north door)
+	 * @param southDoor Description of south door (null if there is no south door)
+	 */
+<span class="fc" id="L22">	public RoomImpl(String furnishing, String adjective, Item item, String northDoor, String southDoor) {</span>
+		// TODO: Fill in
+<span class="fc" id="L24">		this.furnishing = furnishing;</span>
+<span class="fc" id="L25">		this.adjective = adjective;</span>
+<span class="fc" id="L26">		this.item = item;</span>
+<span class="fc" id="L27">		this.northDoor = northDoor;</span>
+<span class="fc" id="L28">		this.southDoor = southDoor;</span>
+<span class="fc" id="L29">	}</span>
+	
+	public String getFurnishing() {
+		// TODO: Fill in
+<span class="fc" id="L33">		return furnishing;</span>
+	}
+
+	public String getAdjective() {
+		// TODO: Fill in
+<span class="fc" id="L38">		return adjective;</span>
+	}
+
+	public Item getItem() {
+		// TODO: Fill in
+
+<span class="fc" id="L44">		return item;</span>
+	}
+
+	public String getNorthDoor() {
+		// TODO: Fill in
+<span class="fc" id="L49">		return northDoor;</span>
+	}
+
+	public String getSouthDoor() {
+		// TODO: Fill in
+<span class="fc" id="L54">		return southDoor;</span>
+	}
+	
+	public String getDescription() {
+		// TODO: Fill in
+<span class="fc" id="L59">		StringBuilder description = new StringBuilder();</span>
+<span class="fc" id="L60">		description.append(&quot;You see a &quot; + adjective + &quot; room.&quot; + newline);</span>
+<span class="fc" id="L61">		description.append(&quot;It has a &quot; + furnishing + &quot;.&quot; + newline);</span>
+		
+<span class="fc bfc" id="L63" title="All 2 branches covered.">		if (northDoor != null) {</span>
+<span class="fc" id="L64">			description.append(&quot;A &quot; + northDoor + &quot; door leads North.&quot; + newline);</span>
+		}
+<span class="fc bfc" id="L66" title="All 2 branches covered.">		if (southDoor != null) {</span>
+<span class="fc" id="L67">			description.append(&quot;A &quot; + southDoor + &quot; door leads South.&quot; + newline);</span>
+		}
+		
+<span class="fc" id="L70">		return description.toString();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -1,0 +1,12 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+coffeemaker,edu.pitt.cs,Player,24,19,7,2,6,4,6,2,0,2
+coffeemaker,edu.pitt.cs,RoomImpl,0,77,0,4,0,21,0,10,0,8
+coffeemaker,edu.pitt.cs,Game,74,0,6,0,24,0,5,0,2,0
+coffeemaker,edu.pitt.cs,Item,0,44,0,0,0,5,0,1,0,1
+coffeemaker,edu.pitt.cs,CoffeeMakerQuest,24,19,7,2,5,3,6,2,0,2
+coffeemaker,edu.pitt.cs,PlayerImpl,0,80,0,6,0,21,0,8,0,5
+coffeemaker,edu.pitt.cs,InstanceType,0,44,0,0,0,2,0,1,0,1
+coffeemaker,edu.pitt.cs,CoffeeMakerQuestImpl,41,237,22,39,12,51,23,20,1,9
+coffeemaker,edu.pitt.cs,Room,28,80,6,7,4,12,5,5,0,2
+coffeemaker,edu.pitt.cs,RoomsJSONParser,44,0,0,0,10,0,3,0,3,0
+coffeemaker,edu.pitt.cs,RoomsJSONParser.new TypeToken() {...},6,0,0,0,1,0,1,0,1,0
