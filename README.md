@@ -1,5 +1,5 @@
 # Unit-Testing
-Build a game called CoffeeMakerQuest using Test Driven Development to cover unit testing.
+In a group of two, we build a game called CoffeeMakerQuest using Test Driven Development to cover unit testing.
 CoffeeMakerQuest is an old school text-based adventure game where the player
 searches a house for coffee, cream, and sugar to make a cup of coffee for
 herself.
